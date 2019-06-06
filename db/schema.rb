@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 2019_06_06_163103) do
   create_table "songs", force: :cascade do |t|
     t.string "artist"
     t.string "name"
-    t.bigint "playlists_id"
+    t.bigint "playlist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["playlists_id"], name: "index_songs_on_playlists_id"
+    t.index ["playlist_id"], name: "index_songs_on_playlist_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,5 +40,5 @@ ActiveRecord::Schema.define(version: 2019_06_06_163103) do
   end
 
   add_foreign_key "playlists", "users"
-  add_foreign_key "songs", "playlists", column: "playlists_id"
+  add_foreign_key "songs", "playlists"
 end
