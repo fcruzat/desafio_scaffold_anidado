@@ -1,10 +1,15 @@
 class SongsController < ApplicationController
 
     def create
-        song = Song.new(song_params)
-        song.playlist = Playlist.find(params[:playlist_id])
-        song.save
-        redirect_to playlist_path(song.playlist), notice: 'La canción se ha creado con éxito'
+        @song = Song.new(song_params)
+        @song.playlist = Playlist.find(params[:playlist_id])
+        @song.save
+        @playlist = @song.playlist
+        if @song.save
+            redirect_to playlist_path(@song.playlist), notice: 'La canción se ha creado con éxito'
+        else
+            redirect_to playlist_path(@song.playlist), alert: 'No se ha podido crear la canción'
+        end
     end
 
     def destroy
